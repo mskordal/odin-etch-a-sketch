@@ -1,0 +1,39 @@
+body
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #24273a;
+}
+
+button
+{
+	font-size: 1.1rem;
+	border-radius: 1rem;
+	border-color: #cad3f5;
+	color: #24273a;
+	padding: 10px 30px;
+	border-style: solid;
+	width: 124px;
+	height: 45px;
+	white-space: nowrap;
+}
+#gridchange
+{
+	background-color: #8aadf4;
+}
+
+#gridclear
+{
+	background-color: #ee99a0;
+}
+
+#grid
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 40px;
+}
