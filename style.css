@@ -13,18 +13,18 @@ button
 	border-radius: 1rem;
 	border-color: #cad3f5;
 	color: #24273a;
-	padding: 10px 30px;
 	border-style: solid;
 	width: 124px;
 	height: 45px;
 	white-space: nowrap;
+	text-align: center;
 }
-#gridchange
+#grid_resize
 {
 	background-color: #8aadf4;
 }
 
-#gridclear
+#grid_clear
 {
 	background-color: #ee99a0;
 }
