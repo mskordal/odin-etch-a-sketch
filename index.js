@@ -1,7 +1,5 @@
 const GRID_STARTING_SIZE = 16;
-const TOTAL_GRIDROWS = GRID_STARTING_SIZE;
-const TOTAL_GRIDBOXES = GRID_STARTING_SIZE;
-const gridbox_width = "10px"
+const GRID_WIDTH = 800
 
 function random_rgb_color()
 {
@@ -29,6 +27,7 @@ function create_grid(size)
 {
 	let total_gridrows = size;
 	let total_gridboxes = size;
+	let gridbox_width = (GRID_WIDTH / size) + "px";
 	const grid = document.getElementById("grid");
 	for (let gridrow_idx = 0; gridrow_idx < total_gridrows; gridrow_idx++)
 	{
