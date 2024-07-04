@@ -1,34 +1,53 @@
 const GRID_STARTING_SIZE = 16;
-const GRID_WIDTH = 800
+const GRID_WIDTH = 800;
+
+const Sides =
+{
+	FRONT: 0,
+	BACK: 1
+}
 
 function random_rgb_color()
 {
 	let rand_int_0_to_2 = Math.floor(Math.random() * 3);
 	if (rand_int_0_to_2 == 0)
 	{
-		return "rgba(255, 0, 0, 0)"
+		return "rgb(255, 0, 0)"
 	}
 	else if (rand_int_0_to_2 == 1)
 	{
-		return "rgba(0, 255, 0, 0)"
+		return "rgb(0, 255, 0)"
 	}
 	else
 	{
-		return "rgba(0, 0, 255, 0)"
+		return "rgb(0, 0, 255)"
 	}
 }
 
 function paint_box(event)
 {
-	event.target.style.backgroundColor = "darkgrey";
+	let opacity = Number(event.target.style.opacity);
+	if(opacity < 1)
+	{
+		opacity += 0.1;
+	}
+	event.target.style.opacity = opacity.toString();
 }
 
-function create_grid(size)
+function create_grid(size, side)
 {
 	let total_gridrows = size;
 	let total_gridboxes = size;
 	let gridbox_width = (GRID_WIDTH / size) + "px";
-	const grid = document.getElementById("grid");
+	let grid;
+	if(side == Sides.FRONT)
+	{
+		grid = document.getElementById("grid_front");
+	}
+	else if(side == Sides.BACK)
+	{
+		grid = document.getElementById("grid_back");
+	}
 	for (let gridrow_idx = 0; gridrow_idx < total_gridrows; gridrow_idx++)
 	{
 		const gridrow = document.createElement("div");
@@ -40,8 +59,15 @@ function create_grid(size)
 		{
 			const gridbox = document.createElement("div");
 			gridbox.setAttribute("id", "gridbox");
-			gridbox.style.backgroundColor = "white";
-			// gridbox.style.backgroundColor = random_rgb_color();
+			if(side == Sides.FRONT)
+			{
+				gridbox.style.backgroundColor = random_rgb_color();
+				gridbox.style.opacity = "0";
+			}
+			else if(side == Sides.BACK)
+			{
+				gridbox.style.backgroundColor = "white";
+			}
 			gridbox.style.width = gridbox_width;
 			gridbox.style.height = gridbox_width;
 			gridbox.style.outline = "solid 1px lightgrey";
@@ -83,19 +109,23 @@ function resize_grid()
 		}
 		final_msg = error_msg + input_msg;
 	}
-	const grid = document.getElementById("grid");
+	let grid = document.getElementById("grid_back");
 	grid.replaceChildren();
-	create_grid(size);
+	grid = document.getElementById("grid_front");
+	grid.replaceChildren();
+	create_grid(size, Sides.BACK);
+	create_grid(size, Sides.FRONT);
 }
 
 function clear_grid()
 {
-	const grid = document.getElementById("grid");
+	const grid = document.getElementById("grid_front");
 	for (const gridrow of grid.children)
 	{
 		for (const gridbox of gridrow.children)
 		{
-			gridbox.style.backgroundColor = "white";
+			gridbox.style.backgroundColor = random_rgb_color();
+			gridbox.style.opacity = "0";
 		}
 	}
 }
@@ -106,4 +136,5 @@ grid_resize_button.addEventListener("click", resize_grid)
 const grid_clear_button = document.getElementById("grid_clear");
 grid_clear_button.addEventListener("click", clear_grid)
 
-create_grid(GRID_STARTING_SIZE);
+create_grid(GRID_STARTING_SIZE, Sides.BACK);
+create_grid(GRID_STARTING_SIZE, Sides.FRONT);

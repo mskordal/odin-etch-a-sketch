@@ -29,11 +29,19 @@ button
 	background-color: #ee99a0;
 }
 
-#grid
+#grid_container
 {
+	padding-top: 40px;
+	width: 800px;
+	height: 800px;
+}
+
+.grid
+{
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding-top: 40px;
+	z-index: 10;
 }
